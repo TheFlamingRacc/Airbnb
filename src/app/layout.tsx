@@ -1,10 +1,21 @@
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import ThemeProviderWrap from "./providers/ThemeProviderWrap";
+import Footer from "./components/Footer";
+import Header from "./components/Header/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "700", "800"],
+  display: "swap",
+  variable: "--font-manrope",
 });
 
 const geistMono = Geist_Mono({
@@ -24,8 +35,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable}`}
+      >
+        <AppRouterCacheProvider>
+          <ThemeProviderWrap>
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProviderWrap>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
