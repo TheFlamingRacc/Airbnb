@@ -42,7 +42,6 @@ export default function RootLayout({
           <ThemeProviderWrap>
             <Header />
             {children}
-            <Footer />
           </ThemeProviderWrap>
         </AppRouterCacheProvider>
       </body>
