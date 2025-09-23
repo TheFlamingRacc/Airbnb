@@ -3,10 +3,11 @@
 import { useState } from "react";
 import {
   Box,
-  IconButton,
+  Button,
   TextField,
   Typography,
   ClickAwayListener,
+  InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -132,57 +133,38 @@ export default function Filter() {
         position="relative"
         display="flex"
         m={1}
-        sx={{
-          width: "100%",
-          "@media (min-width:1000px)": {
-            width: "10vw",
-          },
+        width={{
+          xs: "100%",
+          md: "70%",
         }}
       >
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          pl={2}
-          border="1px solid"
-          borderColor="grey.400"
-          borderRadius="1000px"
-          sx={{
-            width: "100%",
-            "@media (min-width:1000px)": {
-              width: "10vw",
+        <TextField
+          fullWidth
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+          label="Куди?"
+          variant="outlined"
+          slotProps={{
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSearch}
+                  >
+                    <SearchIcon fontSize="medium" />
+                  </Button>
+                </InputAdornment>
+              ),
             },
           }}
-        >
-          <TextField
-            fullWidth
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              setOpen(true);
-            }}
-            onFocus={() => setOpen(true)}
-            label="Куди?"
-            variant="standard"
-            InputProps={{
-              disableUnderline: true,
-            }}
-            sx={{ flex: 1 }}
-          />
-
-          <IconButton
-            onClick={handleSearch}
-            sx={{
-              backgroundColor: "primary.main",
-              height: "100%",
-              aspectRatio: "1/1",
-              "&:hover": {
-                backgroundColor: "primary.main",
-              },
-            }}
-          >
-            <SearchIcon fontSize="medium" />
-          </IconButton>
-        </Box>
+          sx={{ flex: 1 }}
+        />
 
         {open && (
           <Box

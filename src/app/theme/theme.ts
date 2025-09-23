@@ -58,4 +58,5 @@ export const darkTheme = createTheme({
   typography: {
     fontFamily: "Manrope",
   },
+  
 });

@@ -14,60 +14,60 @@ export default function Header() {
         borderBottom={"solid 2px"}
         borderColor={"custom.second"}
         backgroundColor={"custom.main"}
-        sx={{
-          display: "none",
-          "@media (min-width:1000px)": {
-            display: "flex",
-          },
+        flexDirection={"column"}
+        display={{
+          xs: "none",
+          md: "flex",
         }}
+        alignItems={"center"}
       >
-        <Box display={"flex"} alignItems={"center"} gap={2}>
-          <Box
-            component="img"
-            src={"/logos_airbnb-icon.svg"}
-            sx={{
-              width: "45px",
-            }}
-          />
-          <Typography
-            color="#FF9800"
-            fontSize="30px"
-            fontWeight="700"
-            sx={{
-              display: { xs: "none", md: "block" },
-            }}
-          >
-            airbnb
-          </Typography>
+        <Box display={"flex"} justifyContent={"space-between"} width="100%">
+          <Box display={"flex"} alignItems={"center"} gap={2}>
+            <Box
+              component="img"
+              src={"/logos_airbnb-icon.svg"}
+              sx={{
+                width: "45px",
+              }}
+            />
+            <Typography
+              color="#FF9800"
+              fontSize="30px"
+              fontWeight="700"
+              sx={{
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              airbnb
+            </Typography>
+          </Box>
+
+          <NavTabs />
+          <Box display={"flex"} gap={2} paddingY={1}>
+            <IconButton
+              size="large"
+              sx={{
+                backgroundColor: "custom.second",
+              }}
+            >
+              <LanguageIcon fontSize="large" />
+            </IconButton>
+            <IconButton
+              size="large"
+              sx={{
+                backgroundColor: "custom.second",
+              }}
+            >
+              <MenuIcon fontSize="large" />
+            </IconButton>
+          </Box>
         </Box>
-
-        <NavTabs />
-
         <Filter />
-
-        <Box display={"flex"} gap={2} paddingY={1}>
-          <IconButton
-            size="large"
-            sx={{
-              backgroundColor: "custom.second",
-            }}
-          >
-            <LanguageIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            size="large"
-            sx={{
-              backgroundColor: "custom.second",
-            }}
-          >
-            <MenuIcon fontSize="large" />
-          </IconButton>
-        </Box>
       </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
-        alignItems={'center'}
+        alignItems={"center"}
         px={5}
         py={3}
         borderBottom={"solid 2px"}
@@ -80,8 +80,8 @@ export default function Header() {
           },
         }}
       >
-        <NavTabs/>
-        <Filter/>
+        <NavTabs />
+        <Filter />
       </Box>
     </>
   );
