@@ -11,6 +11,8 @@ export default function CustomIconButton({
     <Button
       sx={{
         borderRadius: "50%",
+        aspectRatio: 1,
+        minWidth: 0,
       }}
       variant={variant}
     >

@@ -21,14 +21,25 @@ export const lightTheme = createTheme({
       primary: "#000000ff",
       secondary: "#383838ff",
     },
-    custom: {
-      main: "#fff",
-      second: "#ddddddff",
-    },
+    background: {
+      default: '#fff',
+      paper: '#ddddddff'
+    }
   },
   typography: {
     fontFamily: "Manrope",
   },
+  components: {
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        borderRadius: '50px',
+        padding: 0
+      },
+      
+    },
+  },
+}
 });
 
 export const darkTheme = createTheme({
@@ -50,13 +61,24 @@ export const darkTheme = createTheme({
       primary: "#fff",
       secondary: "#c1c1c1ff",
     },
-    custom: {
-      main: "#121212ff",
-      second: "#202020ff",
-    },
+    background: {
+      default: "#121212ff",
+      paper: "#202020ff"
+    }
   },
   typography: {
     fontFamily: "Manrope",
   },
+  components: {
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        borderRadius: '50px',
+        padding: 0
+      },
+      
+    },
+  },
+}
   
 });

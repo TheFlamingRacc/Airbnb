@@ -11,10 +11,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 export default function Footer() {
   return (
     <Box
-      backgroundColor={"custom.second"}
       color="text.primary"
       sx={{
         padding: "4vw 2vw",
+        backgroundColor: "background.paper",
       }}
     >
       <Typography

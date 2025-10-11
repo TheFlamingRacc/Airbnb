@@ -10,6 +10,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import CustomIconButton from "../CustomIconButton";
 
 export default function Filter() {
   const [value, setValue] = useState("");
@@ -151,14 +152,30 @@ export default function Filter() {
           slotProps={{
             input: {
               endAdornment: (
-                <InputAdornment position="end">
-                  <Button
+                <InputAdornment
+                  sx={{
+                    position: "relative",
+                    zIndex: 2,
+                  }}
+                  position="end"
+                >
+                  <CustomIconButton
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSearch}
+                    sx={{
+                      border: "solid 2px primary",
+                    }}
+                  >
+                    <SearchIcon fontSize="medium" />
+                  </CustomIconButton>
+                  {/* <Button
                     variant="contained"
                     color="primary"
                     onClick={handleSearch}
                   >
                     <SearchIcon fontSize="medium" />
-                  </Button>
+                  </Button> */}
                 </InputAdornment>
               ),
             },
@@ -202,7 +219,7 @@ export default function Filter() {
                   sx={{
                     cursor: "pointer",
                     height: "85px",
-                    "&:hover": { bgcolor: "custom.second" },
+                    "&:hover": { bgcolor: "background.paper" },
                   }}
                   onClick={() => handleSelect(place.name)}
                 >

@@ -8,16 +8,23 @@ export default function Header() {
   return (
     <>
       <Box
+        position="fixed"
+        top={0}
+        left={0}
+        width="100%"
+        zIndex={1100}
         justifyContent={"space-between"}
         px={5}
         py={3}
         borderBottom={"solid 2px"}
-        borderColor={"custom.second"}
-        backgroundColor={"custom.main"}
+        borderColor={"background.paper"}
         flexDirection={"column"}
         display={{
           xs: "none",
           md: "flex",
+        }}
+        sx={{
+          backgroundColor: "background.default",
         }}
         alignItems={"center"}
       >
@@ -47,7 +54,7 @@ export default function Header() {
             <IconButton
               size="large"
               sx={{
-                backgroundColor: "custom.second",
+                backgroundColor: "background.paper",
               }}
             >
               <LanguageIcon fontSize="large" />
@@ -55,7 +62,7 @@ export default function Header() {
             <IconButton
               size="large"
               sx={{
-                backgroundColor: "custom.second",
+                backgroundColor: "background.paper",
               }}
             >
               <MenuIcon fontSize="large" />
@@ -65,19 +72,18 @@ export default function Header() {
         <Filter />
       </Box>
       <Box
-        display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
         px={5}
         py={3}
         borderBottom={"solid 2px"}
-        borderColor={"custom.second"}
-        backgroundColor={"custom.main"}
+        borderColor={"background.paper"}
+        display={{
+          xs: "flex",
+          md: "none",
+        }}
         sx={{
-          display: "flex",
-          "@media (min-width:1000px)": {
-            display: "none",
-          },
+          backgroundColor: "background.default",
         }}
       >
         <NavTabs />
