@@ -19,19 +19,19 @@ export default function NavTabs() {
       <Tab
         icon={<HomeIcon />}
         iconPosition="start"
-        value="/"
+        value="/home"
         label="Помешкання"
       />
       <Tab
         icon={<RoomServiceIcon />}
         iconPosition="start"
-        value="/experiences"
+        value="/home/experiences"
         label="Враження"
       />
       <Tab
         icon={<LocalAirportIcon />}
         iconPosition="start"
-        value="/services"
+        value="/home/services"
         label="Послуги"
       />
     </Tabs>

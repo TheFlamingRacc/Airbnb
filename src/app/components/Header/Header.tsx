@@ -4,7 +4,11 @@ import LanguageIcon from "@mui/icons-material/Language";
 import NavTabs from "./NavTabs";
 import Filter from "./Filter";
 
-export default function Header() {
+export default function Header({
+  withNavigation,
+}: {
+  withNavigation: boolean;
+}) {
   return (
     <>
       <Box
@@ -49,7 +53,7 @@ export default function Header() {
             </Typography>
           </Box>
 
-          <NavTabs />
+          {withNavigation ? <NavTabs /> : <Filter />}
           <Box display={"flex"} gap={2} paddingY={1}>
             <IconButton
               size="large"
@@ -69,7 +73,7 @@ export default function Header() {
             </IconButton>
           </Box>
         </Box>
-        <Filter />
+        {withNavigation ? <Filter /> : ""}
       </Box>
       <Box
         flexDirection={"column"}
@@ -86,7 +90,7 @@ export default function Header() {
           backgroundColor: "background.default",
         }}
       >
-        <NavTabs />
+        {withNavigation ? <NavTabs /> : ""}
         <Filter />
       </Box>
     </>

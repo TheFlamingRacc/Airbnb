@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import ThemeProviderWrap from "./providers/ThemeProviderWrap";
-import Footer from "./components/Footer";
-import Header from "./components/Header/Header";
+import { InitColorSchemeScript } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,14 +34,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <InitColorSchemeScript defaultMode="system" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable}`}
       >
         <AppRouterCacheProvider>
-          <ThemeProviderWrap>
-            <Header />
-            {children}
-          </ThemeProviderWrap>
+          <ThemeProviderWrap>{children}</ThemeProviderWrap>
         </AppRouterCacheProvider>
       </body>
     </html>

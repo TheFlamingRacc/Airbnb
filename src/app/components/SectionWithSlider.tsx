@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import CustomIconButton from "./CustomIconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ArrowForwardIos } from "@mui/icons-material";
 import SliderSlide from "./SliderSlide";
@@ -129,7 +128,7 @@ export default function SectionWithSlider({ title }: { title: string }) {
       </Box>
       <Box
         sx={{
-          minWidth: 0, // 💡 дозволяє стискання у flex-контейнерах
+          minWidth: 0,
         }}
       >
         <Swiper

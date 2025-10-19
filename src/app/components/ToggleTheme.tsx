@@ -15,10 +15,5 @@ export default function ThemeSwitch() {
     setMode(mode === "dark" ? "light" : "dark");
   };
 
-  return (
-    <Switch
-      onChange={handleChange}
-      checked={mode === "dark"} // ← синхронізуємо зі станом теми
-    />
-  );
+  return <Switch onChange={handleChange} checked={mode === "dark"} />;
 }
