@@ -2,8 +2,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import ThemeProviderWrap from "./providers/ThemeProviderWrap";
-import { InitColorSchemeScript } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,16 +33,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <InitColorSchemeScript defaultMode="system" />
-      </head>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable}`}
       >
-        <AppRouterCacheProvider>
-          <ThemeProviderWrap>{children}</ThemeProviderWrap>
-        </AppRouterCacheProvider>
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <AppRouterCacheProvider>
+            <ThemeProviderWrap>{children}</ThemeProviderWrap>
+          </AppRouterCacheProvider>
+        </NextThemesProvider>
       </body>
     </html>
   );

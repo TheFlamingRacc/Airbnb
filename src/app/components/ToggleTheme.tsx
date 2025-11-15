@@ -1,19 +1,14 @@
 "use client";
 
-import { ThemeContext } from "../providers/ThemeProviderWrap";
 import { Switch } from "@mui/material";
-import { useContext } from "react";
+import { useTheme } from "next-themes";
 
 export default function ThemeSwitch() {
-  const context = useContext(ThemeContext);
-  if (!context)
-    throw new Error("ThemeSwitch must be used within ThemeProviderWrapper");
-
-  const { mode, setMode } = context;
+  const { theme, setTheme } = useTheme();
 
   const handleChange = () => {
-    setMode(mode === "dark" ? "light" : "dark");
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  return <Switch onChange={handleChange} checked={mode === "dark"} />;
+  return <Switch onChange={handleChange} checked={theme === "dark"} />;
 }
