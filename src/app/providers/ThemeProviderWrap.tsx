@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, PropsWithChildren, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { ThemeProvider } from "@mui/material";
 import { lightTheme } from "../themes/lightTheme";
@@ -20,7 +20,10 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 export default function ThemeProviderWrap({ children }: PropsWithChildren) {
   const { theme } = useTheme();
   if (!theme) return null;
-  const muiTheme = theme === "dark" ? darkTheme : lightTheme;
+  const muiTheme = useMemo(
+    () => (theme === "dark" ? darkTheme : lightTheme),
+    [theme]
+  );
 
   return <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>;
 }
