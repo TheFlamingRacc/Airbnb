@@ -1,20 +1,23 @@
+"use client";
+
 import { Box, IconButton, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LanguageIcon from "@mui/icons-material/Language";
 import NavTabs from "./NavTabs";
 import Filter from "./Filter";
+import { useRouter } from "next/navigation";
 
 export default function Header({
   withNavigation,
 }: {
   withNavigation: boolean;
 }) {
+  const router = useRouter();
   return (
     <>
       <Box
         position="fixed"
         top={0}
-        left={0}
         width="100%"
         zIndex={1100}
         justifyContent={"space-between"}
@@ -33,7 +36,13 @@ export default function Header({
         alignItems={"center"}
       >
         <Box display={"flex"} justifyContent={"space-between"} width="100%">
-          <Box display={"flex"} alignItems={"center"} gap={2}>
+          <Box
+            display={"flex"}
+            alignItems={"center"}
+            gap={2}
+            sx={{ cursor: "pointer" }}
+            onClick={() => router.push("/home")}
+          >
             <Box
               component="img"
               src={"/logos_airbnb-icon.svg"}

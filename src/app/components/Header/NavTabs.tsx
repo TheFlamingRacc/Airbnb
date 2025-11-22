@@ -15,24 +15,41 @@ export default function NavTabs() {
     router.push(newValue);
   };
   return (
-    <Tabs value={pathname} role="navigation" onChange={handleChange}>
+    <Tabs
+      value={pathname}
+      role="navigation"
+      onChange={handleChange}
+      sx={{ fontSize: "0.5rem" }}
+    >
       <Tab
         icon={<HomeIcon />}
         iconPosition="start"
         value="/home"
         label="Помешкання"
+        sx={{
+          fontSize: "min(3vw, 14px)",
+          px: { xs: 0, sm: 1 },
+        }}
       />
       <Tab
         icon={<RoomServiceIcon />}
         iconPosition="start"
         value="/home/experiences"
         label="Враження"
+        sx={{
+          fontSize: "min(3vw, 14px)",
+          px: { xs: 0, sm: 1 },
+        }}
       />
       <Tab
         icon={<LocalAirportIcon />}
         iconPosition="start"
         value="/home/services"
         label="Послуги"
+        sx={{
+          fontSize: "min(3vw, 14px)",
+          px: { xs: 0, sm: 1 },
+        }}
       />
     </Tabs>
   );

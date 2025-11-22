@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Box,
-  Button,
   TextField,
   Typography,
   ClickAwayListener,
@@ -12,112 +11,112 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import CustomIconButton from "../CustomIconButton";
 
+const places = [
+  {
+    name: "Львів, Львівська область",
+    desc: "Першокласні ресторани",
+    src: "/filter-image2.png",
+  },
+  {
+    name: "Київ, Київська область",
+    desc: "Історичні пам’ятки",
+    src: "/filter-image3.png",
+  },
+  {
+    name: "Одеса, Одеська область",
+    desc: "Морські пляжі",
+    src: "/filter-image1.png",
+  },
+  {
+    name: "Харків, Харківська область",
+    desc: "Сучасні парки",
+    src: "/filter-image4.png",
+  },
+  {
+    name: "Дніпро, Дніпропетровська область",
+    desc: "Річкові прогулянки",
+    src: "/filter-image2.png",
+  },
+  {
+    name: "Запоріжжя, Запорізька область",
+    desc: "Козацька історія",
+    src: "/filter-image3.png",
+  },
+  {
+    name: "Івано-Франківськ, Івано-Франківська область",
+    desc: "Карпатські краєвиди",
+    src: "/filter-image1.png",
+  },
+  {
+    name: "Ужгород, Закарпатська область",
+    desc: "Затишні кав’ярні",
+    src: "/filter-image4.png",
+  },
+  {
+    name: "Чернівці, Чернівецька область",
+    desc: "Архітектурна спадщина",
+    src: "/filter-image2.png",
+  },
+  {
+    name: "Полтава, Полтавська область",
+    desc: "Класична кухня",
+    src: "/filter-image1.png",
+  },
+  {
+    name: "Тернопіль, Тернопільська область",
+    desc: "Озерні види",
+    src: "/filter-image3.png",
+  },
+  {
+    name: "Рівне, Рівненська область",
+    desc: "Природні пам’ятки",
+    src: "/filter-image4.png",
+  },
+  {
+    name: "Луцьк, Волинська область",
+    desc: "Старовинні замки",
+    src: "/filter-image2.png",
+  },
+  {
+    name: "Житомир, Житомирська область",
+    desc: "Еко-маршрути",
+    src: "/filter-image1.png",
+  },
+  {
+    name: "Черкаси, Черкаська область",
+    desc: "Дніпрові пейзажі",
+    src: "/filter-image3.png",
+  },
+  {
+    name: "Кропивницький, Кіровоградська область",
+    desc: "Театральне мистецтво",
+    src: "/filter-image4.png",
+  },
+  {
+    name: "Миколаїв, Миколаївська область",
+    desc: "Морські прогулянки",
+    src: "/filter-image2.png",
+  },
+  {
+    name: "Херсон, Херсонська область",
+    desc: "Дунайські лимани",
+    src: "/filter-image1.png",
+  },
+  {
+    name: "Суми, Сумська область",
+    desc: "Зелені парки",
+    src: "/filter-image3.png",
+  },
+  {
+    name: "Чернігів, Чернігівська область",
+    desc: "Стародавні храми",
+    src: "/filter-image4.png",
+  },
+];
+
 export default function Filter() {
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
-
-  const places = [
-    {
-      name: "Львів, Львівська область",
-      desc: "Першокласні ресторани",
-      src: "/filter-image2.png",
-    },
-    {
-      name: "Київ, Київська область",
-      desc: "Історичні пам’ятки",
-      src: "/filter-image3.png",
-    },
-    {
-      name: "Одеса, Одеська область",
-      desc: "Морські пляжі",
-      src: "/filter-image1.png",
-    },
-    {
-      name: "Харків, Харківська область",
-      desc: "Сучасні парки",
-      src: "/filter-image4.png",
-    },
-    {
-      name: "Дніпро, Дніпропетровська область",
-      desc: "Річкові прогулянки",
-      src: "/filter-image2.png",
-    },
-    {
-      name: "Запоріжжя, Запорізька область",
-      desc: "Козацька історія",
-      src: "/filter-image3.png",
-    },
-    {
-      name: "Івано-Франківськ, Івано-Франківська область",
-      desc: "Карпатські краєвиди",
-      src: "/filter-image1.png",
-    },
-    {
-      name: "Ужгород, Закарпатська область",
-      desc: "Затишні кав’ярні",
-      src: "/filter-image4.png",
-    },
-    {
-      name: "Чернівці, Чернівецька область",
-      desc: "Архітектурна спадщина",
-      src: "/filter-image2.png",
-    },
-    {
-      name: "Полтава, Полтавська область",
-      desc: "Класична кухня",
-      src: "/filter-image1.png",
-    },
-    {
-      name: "Тернопіль, Тернопільська область",
-      desc: "Озерні види",
-      src: "/filter-image3.png",
-    },
-    {
-      name: "Рівне, Рівненська область",
-      desc: "Природні пам’ятки",
-      src: "/filter-image4.png",
-    },
-    {
-      name: "Луцьк, Волинська область",
-      desc: "Старовинні замки",
-      src: "/filter-image2.png",
-    },
-    {
-      name: "Житомир, Житомирська область",
-      desc: "Еко-маршрути",
-      src: "/filter-image1.png",
-    },
-    {
-      name: "Черкаси, Черкаська область",
-      desc: "Дніпрові пейзажі",
-      src: "/filter-image3.png",
-    },
-    {
-      name: "Кропивницький, Кіровоградська область",
-      desc: "Театральне мистецтво",
-      src: "/filter-image4.png",
-    },
-    {
-      name: "Миколаїв, Миколаївська область",
-      desc: "Морські прогулянки",
-      src: "/filter-image2.png",
-    },
-    {
-      name: "Херсон, Херсонська область",
-      desc: "Дунайські лимани",
-      src: "/filter-image1.png",
-    },
-    {
-      name: "Суми, Сумська область",
-      desc: "Зелені парки",
-      src: "/filter-image3.png",
-    },
-    {
-      name: "Чернігів, Чернігівська область",
-      desc: "Стародавні храми",
-      src: "/filter-image4.png",
-    },
-  ];
 
   const handleSearch = () => {
     console.log("Пошук:", value);
@@ -169,13 +168,6 @@ export default function Filter() {
                   >
                     <SearchIcon fontSize="medium" />
                   </CustomIconButton>
-                  {/* <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSearch}
-                  >
-                    <SearchIcon fontSize="medium" />
-                  </Button> */}
                 </InputAdornment>
               ),
             },

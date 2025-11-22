@@ -31,7 +31,7 @@ export default function SliderSlide({
           aspectRatio: "1",
           position: "relative",
           backgroundImage: `url(${imgUrl})`,
-          backgroundSize: "cover",
+          backgroundSize: "100% 100%",
           backgroundPosition: "center",
         }}
         borderRadius={6}
