@@ -1,11 +1,11 @@
 "use client";
 
 import { Box, IconButton, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import LanguageIcon from "@mui/icons-material/Language";
 import NavTabs from "./NavTabs";
 import Filter from "./Filter";
 import { useRouter } from "next/navigation";
+import MenuIconButton from "./MenuIconButton";
 
 export default function Header({
   withNavigation,
@@ -72,14 +72,7 @@ export default function Header({
             >
               <LanguageIcon fontSize="large" />
             </IconButton>
-            <IconButton
-              size="large"
-              sx={{
-                backgroundColor: "background.paper",
-              }}
-            >
-              <MenuIcon fontSize="large" />
-            </IconButton>
+            <MenuIconButton />
           </Box>
         </Box>
         {withNavigation ? <Filter /> : ""}
