@@ -12,6 +12,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.8,
     isPopular: true,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: false,
@@ -20,6 +21,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.9,
     isPopular: false,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: false,
@@ -28,6 +30,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.7,
     isPopular: true,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: true,
@@ -36,6 +39,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.9,
     isPopular: true,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: false,
@@ -44,6 +48,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.6,
     isPopular: false,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: false,
@@ -52,6 +57,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.8,
     isPopular: true,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: false,
@@ -60,6 +66,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.5,
     isPopular: false,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
   {
     original: true,
@@ -68,6 +75,7 @@ export const mockSliderData: SliderSlideProps[] = [
     rate: 4.9,
     isPopular: true,
     imgUrl: "/SliderImage.png",
+    id: 1,
   },
 ];
 

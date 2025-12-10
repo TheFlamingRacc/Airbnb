@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import PopularChip from "./PopularChip";
 import LikeButton from "./LikeButton";
 import Rating from "./Rating";
@@ -12,6 +11,7 @@ export type SliderSlideProps = {
   rate: number;
   isPopular: boolean;
   imgUrl: string;
+  id: number;
 };
 
 export default function SliderSlide({
@@ -21,10 +21,18 @@ export default function SliderSlide({
   rate,
   isPopular,
   imgUrl,
+  id,
 }: SliderSlideProps) {
+  const router = useRouter();
   const pathname = usePathname();
   return (
-    <Box color="text.primary" display={"flex"} flexDirection={"column"} gap={1}>
+    <Box
+      onClick={() => router.push(`/rooms?${id}`)}
+      color="text.primary"
+      display={"flex"}
+      flexDirection={"column"}
+      gap={1}
+    >
       <Box
         sx={{
           width: "100%",
