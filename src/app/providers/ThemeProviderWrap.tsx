@@ -5,6 +5,9 @@ import { useTheme } from "next-themes";
 import { ThemeProvider } from "@mui/material";
 import { lightTheme } from "../themes/lightTheme";
 import { darkTheme } from "../themes/darkTheme";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import "dayjs/locale/uk";
 
 type ThemeMode = "light" | "dark" | "system";
 
@@ -25,5 +28,11 @@ export default function ThemeProviderWrap({ children }: PropsWithChildren) {
     [theme]
   );
 
-  return <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={muiTheme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="uk">
+        {children}
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
 }

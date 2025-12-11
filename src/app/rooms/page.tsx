@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   IconButton,
@@ -14,13 +16,17 @@ import Header from "../components/Header/Header";
 import TranslateIcon from "@mui/icons-material/Translate";
 import ImagesList from "./components/ImagesList";
 import StarIcon from "@mui/icons-material/Star";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import FlatwareIcon from "@mui/icons-material/Flatware";
 import Link from "next/link";
 import PaperLikeButton from "../components/PaperLikeButton";
 import ShareAndSaveButtonGroup from "./components/ShareAndSaveButtonGroup";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 import MainRules, { RuleTypes } from "./components/MainRules";
 import Amenities, { AmenitieTypes } from "./components/Amenities";
+import StickySubSection from "./components/StickySubSection";
+import DateRangePickerCalendar from "./components/DateRangePickerCalendar";
+import { useState } from "react";
+import { Dayjs } from "dayjs";
+
 type OwnerType = {
   ownerName: string;
   ownerAmount: number;
@@ -29,6 +35,7 @@ type OwnerType = {
 
 type PageDataType = {
   apartmentTitle: string;
+  apartmentLocation: string;
   apartmentDescription: string;
   details: string[];
   rate: number;
@@ -42,6 +49,7 @@ type PageDataType = {
 
 const pageData: PageDataType = {
   apartmentTitle: "Апартаменти Scandi Group №18",
+  apartmentLocation: "Варшава, Польща",
   apartmentDescription: "Варшава, Польща: Помешкання для оренди цілком",
   details: ["2 гостя", "1 спальня", "1 ліжко", "1 ванна кімната"],
   rate: 4.98,
@@ -72,6 +80,10 @@ const pageData: PageDataType = {
 };
 
 export default function Rooms() {
+  const [dateValue, setDateValue] = useState<[Dayjs | null, Dayjs | null]>([
+    null,
+    null,
+  ]);
   return (
     <>
       <Box>
@@ -223,64 +235,59 @@ export default function Rooms() {
                     Показати всі зручності ({pageData.amenities.length})
                   </PaperLikeButton>
                 </Box>
-                <Typography fontSize={25} fontWeight={700} color="text.primary">
-                  Варшава: 2 ночі
-                </Typography>
-                <Typography
-                  color="text.secondary"
-                  alignItems={"center"}
-                  display={"flex"}
-                >
-                  9 січ. 2026 р. - 11 січ. 2026 р.
-                </Typography>
-              </Stack>
-              <Box
-                sx={{
-                  width: { xs: "100%", sm: "320px" },
-                  position: "sticky",
-                  top: { xs: 0, sm: "140px" },
-                  alignSelf: "flex-start",
-                }}
-              >
-                <Paper sx={{ p: 3, borderRadius: 2, boxShadow: 3 }}>
-                  <Typography fontWeight={700} fontSize={28} mb={2}>
-                    / ніч
-                  </Typography>
-
-                  <Box display="flex" alignItems="center" gap={1} mb={2}>
-                    <PeopleOutlineIcon />
-                    <Typography>2 гості</Typography>
-                  </Box>
-
-                  <Box display="flex" alignItems="center" gap={1} mb={3}>
-                    <Typography>Дати</Typography>
-                  </Box>
-
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      py: 1.5,
-                      fontWeight: 600,
-                      borderRadius: "99px",
-                      textTransform: "none",
-                    }}
+                {/****subsection7****/}
+                <Box>
+                  <Typography
+                    fontSize={25}
+                    fontWeight={700}
+                    color="text.primary"
                   >
-                    Забронювати
-                  </Button>
-
-                  <Typography fontSize={12} color="text.secondary" mt={2}>
-                    Деякі дані відображаються мовою оригіналу.{" "}
-                    <Box
-                      component="span"
-                      sx={{ textDecoration: "underline", cursor: "pointer" }}
-                    >
-                      Показати оригінал
-                    </Box>
+                    {dateValue[0] === null
+                      ? "Виберіть дату в'їзду"
+                      : dateValue[1] === null
+                      ? "Виберіть дату виїзду"
+                      : `${pageData.apartmentLocation}: ${
+                          dateValue[1]
+                            .startOf("day")
+                            .diff(dateValue[0].startOf("day"), "day") + 1
+                        } ночі`}
                   </Typography>
-                </Paper>
-              </Box>
+                  <Typography
+                    color="text.secondary"
+                    alignItems={"center"}
+                    display={"flex"}
+                  >
+                    {dateValue[0] !== null && dateValue[1] !== null
+                      ? `${dateValue[0]} - ${dateValue[1]}`
+                      : ""}
+                  </Typography>
+                  <DateRangePickerCalendar
+                    value={dateValue}
+                    setValue={setDateValue}
+                    disableDates={["2025/12/10", "2025/12/15", "2025/12/17"]}
+                  />
+                  <Box display={"flex"} justifyContent={"space-between"}>
+                    <IconButton>
+                      <KeyboardIcon />
+                    </IconButton>
+                    <Button
+                      sx={{
+                        color: "text.primary",
+                        textDecoration: "underline",
+                        textTransform: "none",
+                        "&:hover": {
+                          fontWeight: 600,
+                          textDecoration: "underline !important",
+                        },
+                      }}
+                      onClick={() => setDateValue([null, null])}
+                    >
+                      Очистити дані
+                    </Button>
+                  </Box>
+                </Box>
+              </Stack>
+              <StickySubSection />
             </Stack>
           </Stack>
         </Stack>

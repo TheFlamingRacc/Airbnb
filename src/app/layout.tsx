@@ -43,7 +43,9 @@ export default function RootLayout({
           enableSystem
         >
           <AppRouterCacheProvider>
-            <ThemeProviderWrap>{children}</ThemeProviderWrap>
+            <ThemeProviderWrap>
+                {children}
+            </ThemeProviderWrap>
           </AppRouterCacheProvider>
         </NextThemesProvider>
       </body>
