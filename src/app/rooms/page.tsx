@@ -14,19 +14,61 @@ import Header from "../components/Header/Header";
 import TranslateIcon from "@mui/icons-material/Translate";
 import ImagesList from "./components/ImagesList";
 import StarIcon from "@mui/icons-material/Star";
-import WavingHandOutlinedIcon from "@mui/icons-material/WavingHandOutlined";
-import ShowerOutlinedIcon from "@mui/icons-material/ShowerOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import Link from "next/link";
 import PaperLikeButton from "../components/PaperLikeButton";
 import ShareAndSaveButtonGroup from "./components/ShareAndSaveButtonGroup";
+import MainRules, { RuleTypes } from "./components/MainRules";
+import Amenities, { AmenitieTypes } from "./components/Amenities";
+type OwnerType = {
+  ownerName: string;
+  ownerAmount: number;
+  ownerIcon: null | string;
+};
 
-const pageData = {
+type PageDataType = {
+  apartmentTitle: string;
+  apartmentDescription: string;
+  details: string[];
+  rate: number;
+  feedbackAmount: number;
+  guestChoise: boolean;
+  owner: OwnerType;
+  ruleTypes: RuleTypes[];
+  additionalSubSectionText?: string;
+  amenities: AmenitieTypes[];
+};
+
+const pageData: PageDataType = {
   apartmentTitle: "Апартаменти Scandi Group №18",
   apartmentDescription: "Варшава, Польща: Помешкання для оренди цілком",
   details: ["2 гостя", "1 спальня", "1 ліжко", "1 ванна кімната"],
   rate: 4.98,
+  feedbackAmount: 30,
+  guestChoise: true,
+  owner: { ownerName: "Arnold", ownerAmount: 3, ownerIcon: null },
+  ruleTypes: ["sharedBathroom", "commonRoom", "multiplePeople"],
+  additionalSubSectionText:
+    "Капсульна кімната - це приватний вільний простір, який дозволить вам відпочити й почуватися комфортно. У номері є ортопедичний матрац, кондиціонер, Wi-Fi, шафка для речей. Ванна кімната розташована на підлозі.",
+  amenities: [
+    "bath",
+    "hotWater",
+    "conditioner",
+    "dishes",
+    "hangers",
+    "heater",
+    "heating",
+    "independentArrival",
+    "iron",
+    "kitchen",
+    "longLive",
+    "luggage",
+    "parking",
+    "refridgerator",
+    "tv",
+    "wifi",
+  ],
 };
 
 export default function Rooms() {
@@ -89,99 +131,51 @@ export default function Rooms() {
                     display={"flex"}
                   >
                     <StarIcon fontSize="inherit" /> {pageData.rate} •{" "}
-                    <Link href={""}>відгуки</Link>
+                    <Link style={{ textDecoration: "underline" }} href={""}>
+                      {pageData.feedbackAmount === 0
+                        ? ""
+                        : pageData.feedbackAmount}{" "}
+                      {pageData.feedbackAmount === 0
+                        ? ""
+                        : pageData.feedbackAmount === 1
+                        ? "відгук"
+                        : "відгуки"}
+                    </Link>
                   </Typography>
                 </Box>
-                {/****subsection1****/}
+                {/****subsection2****/}
                 <Box display={"flex"} gap={3}>
                   <Avatar
                     sx={{
                       height: "50px",
                       width: "50px",
                     }}
+                    src={
+                      pageData.owner.ownerIcon === null
+                        ? ""
+                        : pageData.owner.ownerIcon
+                    }
                   >
-                    AV
+                    {pageData.owner.ownerName.slice(0, 2).toUpperCase()}
                   </Avatar>
-                  <Box
-                    display={"flex"}
-                    flexDirection={"column"}
-                    justifyContent={"space-between"}
-                  >
+                  <Stack justifyContent={"space-between"}>
                     <Typography fontWeight={600} color="text.primary">
-                      Господар: Курганський
+                      Господар: {pageData.owner.ownerName}
                     </Typography>
                     <Typography color="text.secondary">
-                      Приймає гостей протягом 4 років
+                      {pageData.owner.ownerAmount > 4
+                        ? `Супергосподар • Приймає гостей протягом ${pageData.owner.ownerAmount} років`
+                        : `Приймає гостей протягом ${pageData.owner.ownerAmount} років`}
                     </Typography>
-                  </Box>
+                  </Stack>
                 </Box>
-                {/****subsection1****/}
+                {/****subsection3****/}
                 <Stack spacing={2}>
-                  <Box display={"flex"} gap={3}>
-                    <ShowerOutlinedIcon
-                      sx={{
-                        height: "50px",
-                        width: "50px",
-                        color: "text.primary",
-                      }}
-                    />
-
-                    <Stack justifyContent={"space-between"}>
-                      <Typography fontWeight={600} color="text.primary">
-                        Спільна ванна кімната
-                      </Typography>
-                      <Typography color="text.secondary">
-                        Ви користуватиметеся ванною кімнатою спільно з іншими
-                        людьми.
-                      </Typography>
-                    </Stack>
-                  </Box>
-                  <Box display="flex" gap={3} alignItems="flex-start">
-                    <WavingHandOutlinedIcon
-                      sx={{
-                        height: "50px",
-                        width: "50px",
-                        color: "text.primary",
-                      }}
-                    />
-
-                    <Box
-                      display={"flex"}
-                      flexDirection={"column"}
-                      justifyContent={"space-between"}
-                    >
-                      <Typography fontWeight={600} color="text.primary">
-                        Приміщення спільного користування
-                      </Typography>
-                      <Typography color="text.secondary">
-                        Деякі приміщення в помешканні використовуватимуться
-                        спільно з іншими гостями.
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box display={"flex"} gap={3}>
-                    <PeopleOutlineIcon
-                      sx={{
-                        height: "50px",
-                        width: "50px",
-                        color: "text.primary",
-                      }}
-                    />
-
-                    <Box
-                      display={"flex"}
-                      flexDirection={"column"}
-                      justifyContent={"space-between"}
-                    >
-                      <Typography fontWeight={600} color="text.primary">
-                        Спільна кімната
-                      </Typography>
-                      <Typography color="text.secondary">
-                        Окрім вас, кімнату можуть використовувати інші люди.
-                      </Typography>
-                    </Box>
-                  </Box>
+                  {pageData.ruleTypes.map((rule, i) => (
+                    <MainRules key={i} ruleType={rule} />
+                  ))}
                 </Stack>
+                {/****subsection4****/}
                 <Paper
                   sx={{
                     p: 2,
@@ -194,83 +188,41 @@ export default function Rooms() {
                     </Link>
                   </Typography>
                 </Paper>
-                <Typography color="text.primary">
-                  Капсульна кімната - це приватний вільний простір, який
-                  дозволить вам відпочити й почуватися комфортно. У номері є
-                  ортопедичний матрац, кондиціонер, Wi-Fi, шафка для речей.
-                  Ванна кімната розташована на підлозі.
-                </Typography>
-                <Divider />
-                <Typography fontSize={25} fontWeight={700} color="text.primary">
-                  Які тут зручності
-                </Typography>
-                <Grid container columnSpacing={30}>
-                  <Grid>
-                    <Typography
-                      display={"flex"}
-                      alignItems={"center"}
-                      fontWeight={600}
-                      gap={1}
-                      color="text.secondary"
-                    >
-                      <FlatwareIcon /> Кухня
-                    </Typography>
+                {/****subsection5****/}
+                {pageData.additionalSubSectionText && (
+                  <Typography color="text.primary">
+                    {pageData.additionalSubSectionText}
+                  </Typography>
+                )}
+                {/****subsection6****/}
+                <Box>
+                  <Typography
+                    fontSize={25}
+                    fontWeight={700}
+                    color="text.primary"
+                  >
+                    Які тут зручності
+                  </Typography>
+                  <Grid container columnSpacing={30} mt={2} mb={3}>
+                    <Grid>
+                      <Stack spacing={3}>
+                        {pageData.amenities.slice(0, 5).map((amenity, i) => (
+                          <Amenities key={i} type={amenity} />
+                        ))}
+                      </Stack>
+                    </Grid>
+                    <Grid spacing={5}>
+                      <Stack spacing={3}>
+                        {pageData.amenities.slice(5, 10).map((amenity, i) => (
+                          <Amenities key={i} type={amenity} />
+                        ))}
+                      </Stack>
+                    </Grid>
                   </Grid>
-                  <Grid spacing={5}>
-                    <Stack spacing={1.5}>
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        fontWeight={600}
-                        gap={1}
-                        color="text.secondary"
-                      >
-                        <FlatwareIcon /> Wi-Fi
-                      </Typography>
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        fontWeight={600}
-                        gap={1}
-                        color="text.secondary"
-                      >
-                        <FlatwareIcon /> Безкоштовний вуличний паркінг
-                      </Typography>{" "}
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        fontWeight={600}
-                        gap={1}
-                        color="text.secondary"
-                      >
-                        <FlatwareIcon /> Можна залишити багаж
-                      </Typography>{" "}
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        fontWeight={600}
-                        gap={1}
-                        color="text.secondary"
-                      >
-                        <FlatwareIcon /> Холодильник
-                      </Typography>{" "}
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        fontWeight={600}
-                        gap={1}
-                        color="text.secondary"
-                        sx={{
-                          textDecoration: "line-through",
-                        }}
-                      >
-                        <FlatwareIcon /> Детектор чадного газу
-                      </Typography>
-                    </Stack>
-                  </Grid>
-                  <PaperLikeButton>Показати всі зручності (1)</PaperLikeButton>
-                </Grid>
-                <Divider />
+                  <PaperLikeButton>
+                    Показати всі зручності ({pageData.amenities.length})
+                  </PaperLikeButton>
+                </Box>
                 <Typography fontSize={25} fontWeight={700} color="text.primary">
                   Варшава: 2 ночі
                 </Typography>
