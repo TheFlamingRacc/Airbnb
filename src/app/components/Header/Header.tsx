@@ -16,7 +16,7 @@ export default function Header({
   return (
     <>
       <Box
-        position="fixed"
+        position="sticky"
         top={0}
         width="100%"
         zIndex={1100}

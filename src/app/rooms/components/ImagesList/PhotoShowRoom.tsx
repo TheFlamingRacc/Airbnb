@@ -2,8 +2,7 @@ import { Dialog, Slide, Box, Button, Typography } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IosShareIcon from "@mui/icons-material/IosShare";
+import ShareAndSaveButtonGroup from "../ShareAndSaveButtonGroup";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -52,32 +51,7 @@ export default function PhotoShowRoom({
         >
           <ArrowBackIosNewIcon fontSize="inherit" />
         </Button>
-        <Box display={"flex"} gap={1}>
-          <Button
-            sx={{
-              backgroundColor: "background.default",
-              color: "text.primary",
-              "&:hover": {
-                backgroundColor: "background.paper",
-              },
-            }}
-            startIcon={<IosShareIcon />}
-          >
-            Поділитися
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: "background.default",
-              color: "text.primary",
-              "&:hover": {
-                backgroundColor: "background.paper",
-              },
-            }}
-            startIcon={<FavoriteBorderIcon />}
-          >
-            Зберегти
-          </Button>
-        </Box>
+        <ShareAndSaveButtonGroup />
       </Box>
     </Dialog>
   );
