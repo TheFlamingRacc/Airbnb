@@ -11,6 +11,7 @@ import {
   Grid,
   Stack,
   LinearProgress,
+  Rating,
 } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
@@ -33,6 +34,7 @@ import KeyIcon from "@mui/icons-material/Key";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import MapIcon from "@mui/icons-material/Map";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import Feedback from "./components/Feedback";
 
 type userData = {
   icon?: string;
@@ -42,6 +44,7 @@ type userData = {
   date: string;
   amount: string;
   message: string;
+  id: number;
 };
 
 type OwnerType = {
@@ -131,13 +134,104 @@ const pageData: PageDataType = {
   },
   feedbacks: [
     {
-      name: "Arnold",
-      time: "8 років на Airbnb",
+      id: 1,
+      name: "Olivia",
+      time: "4 роки на Airbnb",
+      rate: 5,
+      date: "1 день тому",
+      amount: "2 ночі",
+      message:
+        "Чудове місце! Дуже чисто, затишно та сучасно. Локація ідеальна — усе поруч. Господар швидко відповідав і дав чудові поради щодо району.",
+    },
+    {
+      id: 2,
+      name: "Jonathan",
+      time: "6 років на Airbnb",
       rate: 4,
-      date: "3 дні тому",
+      date: "5 днів тому",
+      amount: "тиждень",
+      message:
+        "Квартира повністю відповідає опису. Тихий будинок, комфортне ліжко, швидкий Wi-Fi. Лише хотілося б трохи більше кухонного приладдя.",
+    },
+    {
+      id: 3,
+      name: "Maria",
+      time: "1 рік на Airbnb",
+      rate: 5,
+      date: "2 тижні тому",
+      amount: "3 ночі",
+      message:
+        "Перебування було чудовим! Дуже просторна квартира з приємним ароматом і стильним інтер’єром. Особливо сподобався вигляд із вікна.",
+    },
+    {
+      id: 4,
+      name: "Dmitro",
+      time: "3 роки на Airbnb",
+      rate: 4,
+      date: "3 тижні тому",
+      amount: "вихідні",
+      message:
+        "Господар уважний та ввічливий. Квартира чиста, хоч і не дуже велика. Розташування — супер, поруч зупинка та магазини.",
+    },
+    {
+      id: 5,
+      name: "Alicia",
+      time: "9 років на Airbnb",
+      rate: 5,
+      date: "1 місяць тому",
+      amount: "5 ночей",
+      message:
+        "Фантастичне перебування. Дуже тихо вночі, що рідкість для центру міста. Ліжко зручне, інтер’єр затишний. Обов’язково повернуся!",
+    },
+    {
+      id: 6,
+      name: "Robert",
+      time: "7 років на Airbnb",
+      rate: 3,
+      date: "1 місяць тому",
       amount: "кілька ночей",
       message:
-        "Чудового перебування! Квартира була бездоганною, затишною та точно такою, як описано. Розташування було ідеальним, а все, що мені було потрібно, всього,  що мені було потрібно, всього в декількох хвилинах ходьби. Господар був неймовірно доброзичливим і відповідальним, що робило прибуття безтурботним і безтурботним. Я з радістю зупинюся тут знову. Дуже рекомендую!",
+        "Квартира нормальна, але не ідеальна. Трохи холодно ввечері, хоча господар швидко приніс обігрівач. Загалом непоганий варіант за таку ціну.",
+    },
+    {
+      id: 7,
+      name: "Sofia",
+      time: "2 роки на Airbnb",
+      rate: 5,
+      date: "півтора місяці тому",
+      amount: "тиждень",
+      message:
+        "Усе сподобалося! Дуже чисто, пральна машина працює прекрасно, кухня повністю укомплектована. Ідеально для роботи та відпочинку.",
+    },
+    {
+      id: 8,
+      name: "Leon",
+      time: "5 років на Airbnb",
+      rate: 4,
+      date: "2 місяці тому",
+      amount: "4 ночі",
+      message:
+        "Апартаменти затишні, є все необхідне. Єдине — трохи шумно ввечері через сусідній бар, але в берушах спалося добре.",
+    },
+    {
+      id: 9,
+      name: "Emily",
+      time: "8 років на Airbnb",
+      rate: 5,
+      date: "2 місяці тому",
+      amount: "вихідні",
+      message:
+        "Все ідеально. Господар навіть залишив невеликий подарунок на кухні — дуже приємний жест. Чистота на висоті.",
+    },
+    {
+      id: 10,
+      name: "Oleh",
+      time: "10 років на Airbnb",
+      rate: 4,
+      date: "3 місяці тому",
+      amount: "1 ніч",
+      message:
+        "Добре місце для короткого перебування. Зручне ліжко, швидке заселення. Трішки тісна ванна кімната, але чисто.",
     },
   ],
 };
@@ -547,7 +641,57 @@ export default function Rooms() {
                 </Stack>
               </Stack>
               <Divider />
-              
+              {/****Section 4****/}
+              <Stack direction={"row"} justifyContent={"space-between"}>
+                <Stack spacing={4}>
+                  {pageData.feedbacks.slice(0, 3).map((feedback) => (
+                    <Feedback
+                      key={feedback.id}
+                      name={feedback.name}
+                      message={feedback.message}
+                      rate={feedback.rate}
+                      amount={feedback.amount}
+                      date={feedback.date}
+                      desc={feedback.time}
+                    />
+                  ))}
+                </Stack>
+                <Stack spacing={4}>
+                  {pageData.feedbacks.slice(3, 6).map((feedback) => (
+                    <Feedback
+                      key={feedback.id}
+                      name={feedback.name}
+                      message={feedback.message}
+                      rate={feedback.rate}
+                      amount={feedback.amount}
+                      date={feedback.date}
+                      desc={feedback.time}
+                    />
+                  ))}
+                </Stack>
+              </Stack>
+              <Box display={"flex"} gap={3} alignItems={"center"}>
+                <PaperLikeButton
+                  sx={{
+                    width: "120px",
+                    display: "inline-flex",
+                  }}
+                >
+                  Показати всі {pageData.feedbacks.length} відгуків
+                </PaperLikeButton>
+                <Typography
+                  component={"a"}
+                  fontWeight={600}
+                  fontSize={12}
+                  sx={{
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  Для чого потрібні відгуки
+                </Typography>
+              </Box>
+              <Divider />
             </Stack>
           </Stack>
         </Stack>

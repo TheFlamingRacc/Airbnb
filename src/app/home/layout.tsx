@@ -91,7 +91,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
         gap={5}
         sx={{
           backgroundColor: "background.default",
-          pt: { xs: "150px", md: "230px" },
+          pt: 5,
         }}
       >
         {children}
