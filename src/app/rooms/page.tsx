@@ -1,33 +1,18 @@
-"use client";
-
 import {
   Box,
-  IconButton,
   Typography,
-  Button,
   Divider,
   Avatar,
   Paper,
-  Grid,
   Stack,
   LinearProgress,
-  Rating,
 } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
-import TranslateIcon from "@mui/icons-material/Translate";
-import ImagesList from "./components/ImagesList";
 import StarIcon from "@mui/icons-material/Star";
-import Link from "next/link";
 import PaperLikeButton from "../components/PaperLikeButton";
-import ShareAndSaveButtonGroup from "./components/ShareAndSaveButtonGroup";
-import KeyboardIcon from "@mui/icons-material/Keyboard";
 import MainRules, { RuleTypes } from "./components/MainRules";
 import Amenities, { AmenitieTypes } from "./components/Amenities";
-import StickySubSection from "./components/StickySubSection";
-import DateRangePickerCalendar from "./components/DateRangePickerCalendar";
-import { useState } from "react";
-import { Dayjs } from "dayjs";
 import SanitizerIcon from "@mui/icons-material/Sanitizer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import KeyIcon from "@mui/icons-material/Key";
@@ -43,6 +28,8 @@ import {
   EventBusyOutlined,
   ShieldSharp,
 } from "@mui/icons-material";
+import Section1 from "./components/Section1";
+import Section2 from "./components/Section2";
 
 type userData = {
   icon?: string;
@@ -305,10 +292,6 @@ const pageData: PageDataType = {
 };
 
 export default function Rooms() {
-  const [dateValue, setDateValue] = useState<[Dayjs | null, Dayjs | null]>([
-    null,
-    null,
-  ]);
   return (
     <>
       <Box>
@@ -328,194 +311,23 @@ export default function Rooms() {
             }}
             spacing={2}
           >
-            {/*******************section1*********************/}
+            <Section1 apartmentTitle={pageData.apartmentTitle} />
+            <Section2
+              apartmentDescription={pageData.apartmentDescription}
+              price={pageData.price}
+              details={pageData.details}
+              rate={pageData.rate}
+              feedbackAmount={pageData.feedbackAmount}
+              ownerIcon={pageData.owner.ownerIcon}
+              ownerName={pageData.owner.ownerName}
+              ownerAmount={pageData.owner.ownerAmount}
+              disableDates={pageData.disableDates}
+              ruleTypes={pageData.ruleTypes}
+              apartmentLocation={pageData.apartmentLocation}
+              amenities={pageData.amenities}
+              additionalSubSectionText={pageData.additionalSubSectionText}
+            />
 
-            <Box display={"flex"} justifyContent={"space-between"}>
-              <Box display={"flex"}>
-                <IconButton>
-                  <TranslateIcon />
-                </IconButton>
-                <Typography fontSize={25} fontWeight={700} color="text.primary">
-                  {pageData.apartmentTitle}
-                </Typography>
-              </Box>
-              <ShareAndSaveButtonGroup />
-            </Box>
-            <ImagesList />
-
-            {/*******************section2*********************/}
-
-            <Stack
-              direction={{ xs: "column", md: "row" }}
-              justifyContent={"space-between"}
-            >
-              <Stack spacing={2} width={"60%"} divider={<Divider />}>
-                {/****subsection1****/}
-                <Box>
-                  <Typography
-                    fontSize={25}
-                    fontWeight={700}
-                    color="text.primary"
-                  >
-                    {pageData.apartmentDescription}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    {pageData.details.join(" • ")}
-                  </Typography>{" "}
-                  <Typography
-                    color="text.secondary"
-                    alignItems={"center"}
-                    display={"flex"}
-                  >
-                    <StarIcon fontSize="inherit" /> {pageData.rate} •{" "}
-                    <Link style={{ textDecoration: "underline" }} href={""}>
-                      {pageData.feedbackAmount === 0
-                        ? ""
-                        : pageData.feedbackAmount}{" "}
-                      {pageData.feedbackAmount === 0
-                        ? ""
-                        : pageData.feedbackAmount === 1
-                        ? "відгук"
-                        : "відгуки"}
-                    </Link>
-                  </Typography>
-                </Box>
-                {/****subsection2****/}
-                <Box display={"flex"} gap={3}>
-                  <Avatar
-                    sx={{
-                      height: "50px",
-                      width: "50px",
-                    }}
-                    src={
-                      pageData.owner.ownerIcon === null
-                        ? ""
-                        : pageData.owner.ownerIcon
-                    }
-                  >
-                    {pageData.owner.ownerName.slice(0, 2).toUpperCase()}
-                  </Avatar>
-                  <Stack justifyContent={"space-between"}>
-                    <Typography fontWeight={600} color="text.primary">
-                      Господар: {pageData.owner.ownerName}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {pageData.owner.ownerAmount > 4
-                        ? `Супергосподар • Приймає гостей протягом ${pageData.owner.ownerAmount} років`
-                        : `Приймає гостей протягом ${pageData.owner.ownerAmount} років`}
-                    </Typography>
-                  </Stack>
-                </Box>
-                {/****subsection3****/}
-                <Stack spacing={2}>
-                  {pageData.ruleTypes.map((rule, i) => (
-                    <MainRules key={i} ruleType={rule} />
-                  ))}
-                </Stack>
-                {/****subsection4****/}
-                <Paper
-                  sx={{
-                    p: 2,
-                  }}
-                >
-                  <Typography color="text.secondary">
-                    Деякі дані відображаються мовою оригіналу.{" "}
-                    <Link style={{ textDecoration: "underline" }} href={""}>
-                      Показати оригінал
-                    </Link>
-                  </Typography>
-                </Paper>
-                {/****subsection5****/}
-                {pageData.additionalSubSectionText && (
-                  <Typography color="text.primary">
-                    {pageData.additionalSubSectionText}
-                  </Typography>
-                )}
-                {/****subsection6****/}
-                <Box>
-                  <Typography
-                    fontSize={25}
-                    fontWeight={700}
-                    color="text.primary"
-                  >
-                    Які тут зручності
-                  </Typography>
-                  <Grid container columnSpacing={30} mt={2} mb={3}>
-                    <Grid>
-                      <Stack spacing={3}>
-                        {pageData.amenities.slice(0, 5).map((amenity, i) => (
-                          <Amenities key={i} type={amenity} />
-                        ))}
-                      </Stack>
-                    </Grid>
-                    <Grid spacing={5}>
-                      <Stack spacing={3}>
-                        {pageData.amenities.slice(5, 10).map((amenity, i) => (
-                          <Amenities key={i} type={amenity} />
-                        ))}
-                      </Stack>
-                    </Grid>
-                  </Grid>
-                  <PaperLikeButton>
-                    Показати всі зручності ({pageData.amenities.length})
-                  </PaperLikeButton>
-                </Box>
-                {/****subsection7****/}
-                <Box>
-                  <Typography
-                    fontSize={25}
-                    fontWeight={700}
-                    color="text.primary"
-                  >
-                    {dateValue[0] === null
-                      ? "Виберіть дату в'їзду"
-                      : dateValue[1] === null
-                      ? "Виберіть дату виїзду"
-                      : `${pageData.apartmentLocation}: ${dateValue[1]
-                          .startOf("day")
-                          .diff(dateValue[0].startOf("day"), "day")} ночі`}
-                  </Typography>
-                  <Typography
-                    color="text.secondary"
-                    alignItems={"center"}
-                    display={"flex"}
-                  >
-                    {dateValue[0] !== null && dateValue[1] !== null
-                      ? `${dateValue[0]} - ${dateValue[1]}`
-                      : "Щоб переглянути точну ціну, вкажіть дати подорожі"}
-                  </Typography>
-                  <DateRangePickerCalendar
-                    value={dateValue}
-                    setValue={setDateValue}
-                    disableDates={pageData.disableDates || []}
-                  />
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <IconButton>
-                      <KeyboardIcon />
-                    </IconButton>
-                    <Button
-                      sx={{
-                        color: "text.primary",
-                        textDecoration: "underline",
-                        textTransform: "none",
-                        "&:hover": {
-                          fontWeight: 600,
-                          textDecoration: "underline !important",
-                        },
-                      }}
-                      onClick={() => setDateValue([null, null])}
-                    >
-                      Очистити дати
-                    </Button>
-                  </Box>
-                </Box>
-              </Stack>
-              <StickySubSection
-                value={dateValue}
-                setValue={setDateValue}
-                price={pageData.price}
-              />
-            </Stack>
             <Divider />
             {/*******************section3*********************/}
             <Stack spacing={2}>

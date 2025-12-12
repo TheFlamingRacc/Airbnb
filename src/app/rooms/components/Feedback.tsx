@@ -1,4 +1,5 @@
 import { Avatar, Stack, Typography, Box, Rating } from "@mui/material";
+import UserProfile from "./UserProfile";
 
 export default function Feedback({
   avatar = false,
@@ -19,23 +20,12 @@ export default function Feedback({
 }) {
   return (
     <Stack spacing={1} maxWidth={500}>
-      <Box display={"flex"} gap={3}>
-        <Avatar
-          sx={{
-            height: "50px",
-            width: "50px",
-          }}
-          src={avatar ? avatar : ""}
-        >
-          {name.slice(0, 2).toUpperCase()}
-        </Avatar>
-        <Stack justifyContent={"space-around"}>
-          <Typography fontWeight={600} color="text.primary">
-            {name}
-          </Typography>
-          <Typography color="text.secondary">{desc}</Typography>
-        </Stack>
-      </Box>
+      <UserProfile name={name} icon={avatar || null}>
+        <Typography fontWeight={600} color="text.primary">
+          {name}
+        </Typography>
+        <Typography color="text.secondary">{desc}</Typography>
+      </UserProfile>
       <Stack
         direction={"row"}
         gap={1}
