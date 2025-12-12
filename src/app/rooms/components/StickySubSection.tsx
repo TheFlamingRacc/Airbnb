@@ -1,29 +1,56 @@
 import { Box, Paper, Typography, Button } from "@mui/material";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import { Dayjs } from "dayjs";
 
-export default function StickySubSection() {
+export default function StickySubSection({
+  value,
+  setValue,
+  price,
+}: {
+  value: [null | Dayjs, null | Dayjs];
+  setValue: (value: [Dayjs | null, Dayjs | null]) => void;
+  price: number;
+}) {
   return (
     <Box
       sx={{
-        width: { xs: "100%", sm: "320px" },
+        width: { xs: "100%", sm: "370px" },
         position: "sticky",
         top: { xs: 0, sm: "140px" },
         alignSelf: "flex-start",
       }}
     >
-      <Paper sx={{ p: 3, borderRadius: 2, boxShadow: 3 }}>
-        <Typography fontWeight={700} fontSize={28} mb={2}>
-          / ніч
+      <Paper
+        sx={{
+          p: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: "background.default",
+          border: "solid 1px",
+          borderColor: "background.paper",
+        }}
+      >
+        <Typography fontWeight={500} fontSize={28} mb={2}>
+          {value[0] === null || value[1] === null
+            ? "Додайте дати, щоб дізнатися ціни"
+            : `₴${
+                price *
+                value[1].startOf("day").diff(value[0].startOf("day"), "day")
+              }`}
+          <Typography component={"span"}>
+            {value[0] === null || value[1] === null
+              ? ""
+              : ` за ${value[1]
+                  .startOf("day")
+                  .diff(value[0].startOf("day"), "day")} ${
+                  value[1]
+                    .startOf("day")
+                    .diff(value[0].startOf("day"), "day") === 1
+                    ? "ніч"
+                    : "ночі"
+                }`}
+          </Typography>
         </Typography>
-
-        <Box display="flex" alignItems="center" gap={1} mb={2}>
-          <PeopleOutlineIcon />
-          <Typography>2 гості</Typography>
-        </Box>
-
-        <Box display="flex" alignItems="center" gap={1} mb={3}>
-          <Typography>Дати</Typography>
-        </Box>
 
         <Button
           fullWidth
@@ -38,16 +65,16 @@ export default function StickySubSection() {
         >
           Забронювати
         </Button>
-
-        <Typography fontSize={12} color="text.secondary" mt={2}>
-          Деякі дані відображаються мовою оригіналу.{" "}
-          <Box
-            component="span"
-            sx={{ textDecoration: "underline", cursor: "pointer" }}
-          >
-            Показати оригінал
-          </Box>
-        </Typography>
+        {value[0] === null ||
+          (value[1] === null && (
+            <Typography
+              sx={{
+                textAlign: "center",
+              }}
+            >
+              Поки що ви нічого не платите
+            </Typography>
+          ))}
       </Paper>
     </Box>
   );

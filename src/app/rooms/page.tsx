@@ -10,6 +10,7 @@ import {
   Paper,
   Grid,
   Stack,
+  LinearProgress,
 } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
@@ -26,6 +27,22 @@ import StickySubSection from "./components/StickySubSection";
 import DateRangePickerCalendar from "./components/DateRangePickerCalendar";
 import { useState } from "react";
 import { Dayjs } from "dayjs";
+import SanitizerIcon from "@mui/icons-material/Sanitizer";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import KeyIcon from "@mui/icons-material/Key";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import MapIcon from "@mui/icons-material/Map";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+
+type userData = {
+  icon?: string;
+  name: string;
+  time: string;
+  rate: number;
+  date: string;
+  amount: string;
+  message: string;
+};
 
 type OwnerType = {
   ownerName: string;
@@ -45,6 +62,24 @@ type PageDataType = {
   ruleTypes: RuleTypes[];
   additionalSubSectionText?: string;
   amenities: AmenitieTypes[];
+  disableDates?: string[];
+  price: number;
+  rating: {
+    clean: number;
+    accuracy: number;
+    arriving: number;
+    communication: number;
+    location: number;
+    quality: number;
+    stats: {
+      5: number;
+      4: number;
+      3: number;
+      2: number;
+      1: number;
+    };
+  };
+  feedbacks: userData[];
 };
 
 const pageData: PageDataType = {
@@ -76,6 +111,34 @@ const pageData: PageDataType = {
     "refridgerator",
     "tv",
     "wifi",
+  ],
+  disableDates: ["2025/12/10", "2025/12/15", "2025/12/17"],
+  price: 1234,
+  rating: {
+    clean: 4.7,
+    accuracy: 4.5,
+    arriving: 4.3,
+    communication: 4.2,
+    location: 4.8,
+    quality: 4.9,
+    stats: {
+      5: 87,
+      4: 5,
+      3: 3,
+      2: 2,
+      1: 2,
+    },
+  },
+  feedbacks: [
+    {
+      name: "Arnold",
+      time: "8 років на Airbnb",
+      rate: 4,
+      date: "3 дні тому",
+      amount: "кілька ночей",
+      message:
+        "Чудового перебування! Квартира була бездоганною, затишною та точно такою, як описано. Розташування було ідеальним, а все, що мені було потрібно, всього,  що мені було потрібно, всього в декількох хвилинах ходьби. Господар був неймовірно доброзичливим і відповідальним, що робило прибуття безтурботним і безтурботним. Я з радістю зупинюся тут знову. Дуже рекомендую!",
+    },
   ],
 };
 
@@ -124,7 +187,7 @@ export default function Rooms() {
               direction={{ xs: "column", md: "row" }}
               justifyContent={"space-between"}
             >
-              <Stack spacing={2} width={"65%"} divider={<Divider />}>
+              <Stack spacing={2} width={"60%"} divider={<Divider />}>
                 {/****subsection1****/}
                 <Box>
                   <Typography
@@ -246,11 +309,9 @@ export default function Rooms() {
                       ? "Виберіть дату в'їзду"
                       : dateValue[1] === null
                       ? "Виберіть дату виїзду"
-                      : `${pageData.apartmentLocation}: ${
-                          dateValue[1]
-                            .startOf("day")
-                            .diff(dateValue[0].startOf("day"), "day") + 1
-                        } ночі`}
+                      : `${pageData.apartmentLocation}: ${dateValue[1]
+                          .startOf("day")
+                          .diff(dateValue[0].startOf("day"), "day")} ночі`}
                   </Typography>
                   <Typography
                     color="text.secondary"
@@ -259,12 +320,12 @@ export default function Rooms() {
                   >
                     {dateValue[0] !== null && dateValue[1] !== null
                       ? `${dateValue[0]} - ${dateValue[1]}`
-                      : ""}
+                      : "Щоб переглянути точну ціну, вкажіть дати подорожі"}
                   </Typography>
                   <DateRangePickerCalendar
                     value={dateValue}
                     setValue={setDateValue}
-                    disableDates={["2025/12/10", "2025/12/15", "2025/12/17"]}
+                    disableDates={pageData.disableDates || []}
                   />
                   <Box display={"flex"} justifyContent={"space-between"}>
                     <IconButton>
@@ -282,12 +343,211 @@ export default function Rooms() {
                       }}
                       onClick={() => setDateValue([null, null])}
                     >
-                      Очистити дані
+                      Очистити дати
                     </Button>
                   </Box>
                 </Box>
               </Stack>
-              <StickySubSection />
+              <StickySubSection
+                value={dateValue}
+                setValue={setDateValue}
+                price={pageData.price}
+              />
+            </Stack>
+            <Divider />
+            {/****section3****/}
+            <Stack spacing={2}>
+              <Typography
+                fontSize={28}
+                display={"flex"}
+                alignItems={"center"}
+                color="text.primary"
+              >
+                <StarIcon fontSize="inherit" /> {pageData.rate} •{" "}
+                <Typography fontSize={"inherit"} component={"span"}>
+                  {pageData.feedbackAmount === 0 ? "" : pageData.feedbackAmount}{" "}
+                  {pageData.feedbackAmount === 0
+                    ? ""
+                    : pageData.feedbackAmount === 1
+                    ? "відгук"
+                    : "відгуків"}
+                </Typography>
+              </Typography>
+              <Stack
+                justifyContent={"space-between"}
+                divider={
+                  <Divider
+                    orientation="vertical"
+                    flexItem
+                    variant="middle"
+                    sx={{ height: "110px" }}
+                  />
+                }
+                direction={"row"}
+                minHeight={50}
+                color={"text.primary"}
+              >
+                <Stack width={"11%"}>
+                  <Typography mb={1}>Загальний рейтинг</Typography>
+                  <Typography
+                    lineHeight={"90%"}
+                    fontSize={14}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={1}
+                  >
+                    5
+                    <LinearProgress
+                      sx={{ width: "100%", borderRadius: "99px" }}
+                      variant="determinate"
+                      value={pageData.rating.stats[5]}
+                    />
+                  </Typography>
+
+                  <Typography
+                    lineHeight={"90%"}
+                    fontSize={14}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={1}
+                  >
+                    4
+                    <LinearProgress
+                      sx={{ width: "100%", borderRadius: "99px" }}
+                      variant="determinate"
+                      value={pageData.rating.stats[4]}
+                    />
+                  </Typography>
+                  <Typography
+                    lineHeight={"90%"}
+                    fontSize={14}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={1}
+                  >
+                    3
+                    <LinearProgress
+                      sx={{ width: "100%", borderRadius: "99px" }}
+                      variant="determinate"
+                      value={pageData.rating.stats[3]}
+                    />
+                  </Typography>
+                  <Typography
+                    lineHeight={"90%"}
+                    fontSize={14}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={1}
+                  >
+                    2
+                    <LinearProgress
+                      sx={{ width: "100%", borderRadius: "99px" }}
+                      variant="determinate"
+                      value={pageData.rating.stats[2]}
+                    />
+                  </Typography>
+                  <Typography
+                    lineHeight={"90%"}
+                    fontSize={14}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={1}
+                  >
+                    1
+                    <LinearProgress
+                      sx={{ width: "100%", borderRadius: "99px" }}
+                      variant="determinate"
+                      value={pageData.rating.stats[1]}
+                    />
+                  </Typography>
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Чистота</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.clean}
+                  </Typography>
+                  <SanitizerIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Точність</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.accuracy}
+                  </Typography>
+                  <CheckCircleIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Прибуття</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.arriving}
+                  </Typography>
+                  <KeyIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Комунікація</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.communication}
+                  </Typography>
+                  <ChatBubbleIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Розташування</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.location}
+                  </Typography>
+                  <MapIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+                <Stack width={"11%"}>
+                  <Typography>Ціна/якість</Typography>
+                  <Typography fontWeight={600}>
+                    {pageData.rating.quality}
+                  </Typography>
+                  <LocalOfferIcon
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      mt: "auto",
+                      mb: 1,
+                    }}
+                  />
+                </Stack>
+              </Stack>
+              <Divider />
+              
             </Stack>
           </Stack>
         </Stack>
