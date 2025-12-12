@@ -59,6 +59,7 @@ export default function Feedback({
       <Typography
         component={"a"}
         fontWeight={600}
+        color="text.secondary"
         sx={{
           textDecoration: "underline",
           cursor: "pointer",
