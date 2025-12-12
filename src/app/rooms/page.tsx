@@ -38,7 +38,11 @@ import Feedback from "./components/Feedback";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { ArrowForwardIos, ShieldSharp } from "@mui/icons-material";
+import {
+  ArrowForwardIos,
+  EventBusyOutlined,
+  ShieldSharp,
+} from "@mui/icons-material";
 
 type userData = {
   icon?: string;
@@ -96,6 +100,20 @@ type PageDataType = {
     };
   };
   feedbacks: userData[];
+  importantInfo: {
+    1: {
+      title: string;
+      description: string[] | string;
+    };
+    2: {
+      title: string;
+      description: string[] | string;
+    };
+    3: {
+      title: string;
+      description: string[] | string;
+    };
+  };
 };
 
 const pageData: PageDataType = {
@@ -261,6 +279,29 @@ const pageData: PageDataType = {
         "Добре місце для короткого перебування. Зручне ліжко, швидке заселення. Трішки тісна ванна кімната, але чисто.",
     },
   ],
+  importantInfo: {
+    1: {
+      title: "Правила скасування бронювання",
+      description:
+        "Додайте дати подорожі, щоб дізнатися подробиці скасування цієї подорожі.",
+    },
+    2: {
+      title: "Правила дому",
+      description: [
+        "Прибуття: після 14:00",
+        "Виїзд: до 11:00",
+        "Максимальна кількість гостей: 2",
+      ],
+    },
+    3: {
+      title: "Правила безпеки в помешканні",
+      description: [
+        "Немає датчика диму",
+        "Детектор чадного газу не потрібен",
+        "Необхідно підніматись сходами",
+      ],
+    },
+  },
 };
 
 export default function Rooms() {
@@ -887,6 +928,101 @@ export default function Rooms() {
                       Щоб захистити свої платежі, для надсилання грошей та
                       спілкування з господарями користуйтеся лише платформою
                       Airbnb.
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Divider />
+              {/*******************section6*********************/}
+              <Stack spacing={3}>
+                <Typography color="text.primary" fontSize={24} fontWeight={700}>
+                  Важлива інформація
+                </Typography>
+                <Stack direction={"row"} justifyContent={"space-between"}>
+                  <Stack width={"33%"} color={"text.primary"}>
+                    <EventBusyOutlined
+                      color="inherit"
+                      fontSize="large"
+                      sx={{ mb: 3 }}
+                    />
+                    <Typography color="text.primary" fontWeight={600}>
+                      {pageData.importantInfo[1].title}
+                    </Typography>
+                    <Typography color="text.secondary" maxWidth={"70%"}>
+                      {pageData.importantInfo[1].description}
+                    </Typography>
+                    <Typography
+                      color="text.secondary"
+                      sx={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Додати дати
+                    </Typography>
+                  </Stack>
+                  <Stack width={"33%"} color={"text.primary"}>
+                    <KeyIcon color="inherit" fontSize="large" sx={{ mb: 3 }} />
+                    <Typography color="text.primary" fontWeight={600}>
+                      {pageData.importantInfo[2].title}
+                    </Typography>
+                    {Array.isArray(pageData.importantInfo[2].description) ? (
+                      pageData.importantInfo[2].description.map((desc) => (
+                        <Typography
+                          key={desc}
+                          color="text.secondary"
+                          maxWidth={"70%"}
+                        >
+                          {desc}
+                        </Typography>
+                      ))
+                    ) : (
+                      <Typography color="text.secondary" maxWidth={"70%"}>
+                        {pageData.importantInfo[2].description}
+                      </Typography>
+                    )}
+                    <Typography
+                      color="text.secondary"
+                      sx={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Докладніше
+                    </Typography>
+                  </Stack>
+                  <Stack width={"33%"} color={"text.primary"}>
+                    <ShieldSharp
+                      color="inherit"
+                      fontSize="large"
+                      sx={{ mb: 3 }}
+                    />
+                    <Typography color="text.primary" fontWeight={600}>
+                      {pageData.importantInfo[3].title}
+                    </Typography>
+                    {Array.isArray(pageData.importantInfo[3].description) ? (
+                      pageData.importantInfo[3].description.map((desc) => (
+                        <Typography
+                          key={desc}
+                          color="text.secondary"
+                          maxWidth={"70%"}
+                        >
+                          {desc}
+                        </Typography>
+                      ))
+                    ) : (
+                      <Typography color="text.secondary" maxWidth={"70%"}>
+                        {pageData.importantInfo[3].description}
+                      </Typography>
+                    )}
+                    <Typography
+                      color="text.secondary"
+                      sx={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Докладніше
                     </Typography>
                   </Stack>
                 </Stack>
