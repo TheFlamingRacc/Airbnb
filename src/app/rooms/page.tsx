@@ -11,8 +11,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header/Header";
 import StarIcon from "@mui/icons-material/Star";
 import PaperLikeButton from "../components/PaperLikeButton";
-import MainRules, { RuleTypes } from "./components/MainRules";
-import Amenities, { AmenitieTypes } from "./components/Amenities";
+import { RuleTypes } from "./components/MainRules";
+import { AmenitieTypes } from "./components/Amenities";
 import SanitizerIcon from "@mui/icons-material/Sanitizer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import KeyIcon from "@mui/icons-material/Key";
@@ -30,6 +30,8 @@ import {
 } from "@mui/icons-material";
 import Section1 from "./components/Section1";
 import Section2 from "./components/Section2";
+import Section5 from "./components/Section5";
+import ShowMoreButton from "./components/ShowMoreButton";
 
 type userData = {
   icon?: string;
@@ -101,6 +103,8 @@ type PageDataType = {
       description: string[] | string;
     };
   };
+  position: [number, number];
+  locationDescription: string;
 };
 
 const pageData: PageDataType = {
@@ -289,6 +293,9 @@ const pageData: PageDataType = {
       ],
     },
   },
+  position: [51.505, -0.09],
+  locationDescription:
+    "Ще один із наших улюблених районів - регіон навколо Золотих воріт. Це найкращий старий Київ, який пропонує велике поєднання модних ресторанів, кафе та інших розважальних закладів. Розташований в основному в самому центрі історичного Києва, цей район забезпечить вам легкий пішохідний доступ до всіх історичних пам 'яток Києва. Ви також можете дістатися до Незалежної площі та головної вулиці Крещатика за 5",
 };
 
 export default function Rooms() {
@@ -573,6 +580,12 @@ export default function Rooms() {
                 </Typography>
               </Box>
               <Divider />
+              <Section5
+                position={pageData.position}
+                location={pageData.apartmentLocation}
+                locationDescription={pageData.locationDescription}
+              />
+              <Divider />
               {/*******************section5*********************/}
               <Stack spacing={3}>
                 <Typography color="text.primary" fontSize={24} fontWeight={700}>
@@ -692,18 +705,7 @@ export default function Rooms() {
                       <Typography color="text.primary">
                         {pageData.owner.shortDescription}
                       </Typography>
-                      <Typography
-                        display={"flex"}
-                        alignItems={"center"}
-                        color="text.primary"
-                        fontWeight={600}
-                        sx={{
-                          textDecoration: "underline",
-                          cursor: "pointer",
-                        }}
-                      >
-                        Показати більше <ArrowForwardIos fontSize="small" />
-                      </Typography>
+                      <ShowMoreButton href="" arrowed />
                     </Stack>
                     {pageData.owner.isSuper && (
                       <Stack spacing={1}>
