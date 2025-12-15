@@ -2,11 +2,9 @@ import { Box, Typography, Grid, Stack } from "@mui/material";
 import Amenities, { AmenitieTypes } from "../Amenities";
 import PaperLikeButton from "@/app/components/PaperLikeButton";
 
-export default function Sec2SubSec6({
-  amenities,
-}: {
-  amenities: AmenitieTypes[];
-}) {
+type Props = { amenities: AmenitieTypes[] };
+
+export default function AmenitiesComponent({ amenities }: Props) {
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="text.primary">

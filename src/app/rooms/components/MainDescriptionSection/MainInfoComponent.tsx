@@ -1,18 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { Star } from "@mui/icons-material";
+import { PageDataType } from "@/app/types";
 
-export default function Sec2Subsec1({
+type Props = Pick<
+  PageDataType,
+  "details" | "apartmentDescription" | "feedbackAmount" | "rate"
+>;
+
+export default function MainInfoComponent({
   details,
   apartmentDescription,
   feedbackAmount,
   rate,
-}: {
-  details: string[];
-  apartmentDescription: string;
-  feedbackAmount: number;
-  rate: number;
-}) {
+}: Props) {
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="text.primary">

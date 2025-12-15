@@ -1,46 +1,32 @@
 "use client";
 import { useState } from "react";
-import { Stack, Typography, Divider, Box, Paper, Grid } from "@mui/material";
+import { Stack, Typography, Divider, Paper } from "@mui/material";
 import StickySubSection from "../StickySubSection";
 import Link from "next/link";
-import { Dayjs } from "dayjs";
-import MainRules, { RuleTypes } from "../MainRules";
-import { AmenitieTypes } from "../Amenities";
-import Sec2Subsec1 from "./Sec2Subsec1";
+import MainRules from "../MainRules";
+import MainInfoComponent from "./MainInfoComponent";
 import UserProfile from "../UserProfile";
-import Sec2SubSec7 from "./Sec2Subsec7";
-import Sec2SubSec6 from "./Sec2SubSec6";
+import AmenitiesComponent from "./AmenitiesComponent";
+import { pageData } from "../../pageData";
+import { DateRangeCalendarValue } from "@/app/types";
+import DateRangePickerComponent from "./DateRangePickerComponent";
 
-export default function Section2({
+const {
   apartmentDescription,
   details,
   rate,
   feedbackAmount,
-  ownerIcon,
-  ownerName,
-  ownerAmount,
+  owner,
   ruleTypes,
   additionalSubSectionText,
   amenities,
   price,
   apartmentLocation,
   disableDates,
-}: {
-  apartmentDescription: string;
-  details: string[];
-  rate: number;
-  feedbackAmount: number;
-  ownerIcon: null | string;
-  ownerName: string;
-  ownerAmount: number;
-  ruleTypes: RuleTypes[];
-  additionalSubSectionText?: string;
-  amenities: AmenitieTypes[];
-  price: number;
-  apartmentLocation: string;
-  disableDates?: string[];
-}) {
-  const [dateValue, setDateValue] = useState<[Dayjs | null, Dayjs | null]>([
+} = pageData;
+
+export default function MainDescriptionSection() {
+  const [dateValue, setDateValue] = useState<DateRangeCalendarValue>([
     null,
     null,
   ]);
@@ -50,21 +36,21 @@ export default function Section2({
       justifyContent={"space-between"}
     >
       <Stack spacing={2} width={"60%"} divider={<Divider />}>
-        <Sec2Subsec1
+        <MainInfoComponent
           rate={rate}
           apartmentDescription={apartmentDescription}
           details={details}
           feedbackAmount={feedbackAmount}
         />
 
-        <UserProfile name={ownerName} icon={ownerIcon}>
+        <UserProfile name={owner.name} icon={owner.iconUrl}>
           <Typography fontWeight={600} color="text.primary">
-            Господар: {ownerName}
+            Господар: {owner.name}
           </Typography>
           <Typography color="text.secondary">
-            {ownerAmount > 4
-              ? `Супергосподар • Приймає гостей протягом ${ownerAmount} років`
-              : `Приймає гостей протягом ${ownerAmount} років`}
+            {owner.amount > 4
+              ? `Супергосподар • Приймає гостей протягом ${owner.amount} років`
+              : `Приймає гостей протягом ${owner.amount} років`}
           </Typography>
         </UserProfile>
 
@@ -93,9 +79,9 @@ export default function Section2({
           </Typography>
         )}
 
-        <Sec2SubSec6 amenities={amenities} />
+        <AmenitiesComponent amenities={amenities} />
 
-        <Sec2SubSec7
+        <DateRangePickerComponent
           value={dateValue}
           setValue={setDateValue}
           apartmentLocation={apartmentLocation}

@@ -7,7 +7,11 @@ import ReactDOMServer from "react-dom/server";
 import "leaflet/dist/leaflet.css";
 import PlaceIcon from "@mui/icons-material/Place";
 
-export default function Map({ position }: { position: [number, number] }) {
+type Props = {
+  position: [number, number];
+};
+
+export default function Map({ position }: Props) {
   const muiMarker = L.divIcon({
     className: "",
     html: ReactDOMServer.renderToString(<PlaceIcon sx={{ fontSize: 48 }} />),

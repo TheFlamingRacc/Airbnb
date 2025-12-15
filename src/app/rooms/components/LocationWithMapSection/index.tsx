@@ -1,24 +1,19 @@
 import { Stack, Typography } from "@mui/material";
 import Map from "./Map";
 import ShowMoreButton from "../ShowMoreButton";
+import { pageData } from "../../pageData";
 
-export default function Section5({
-  position,
-  location,
-  locationDescription,
-}: {
-  position: [number, number];
-  location: string;
-  locationDescription: string;
-}) {
+const { mapMarkerPosition, apartmentLocation, locationDescription } = pageData;
+
+export default function LocationWithMapSection() {
   return (
     <Stack spacing={3}>
       <Typography color="text.primary" fontSize={24} fontWeight={700}>
         Де ви будете
       </Typography>
-      <Map position={position} />
+      <Map position={mapMarkerPosition} />
       <Typography color="text.primary" fontSize={20} fontWeight={700}>
-        {location}
+        {apartmentLocation}
       </Typography>
       <Typography color="text.primary">
         {locationDescription.length >= 460

@@ -39,7 +39,11 @@ function getIcon(type: string) {
 
 export type RuleTypes = keyof typeof ruleTypes;
 
-export default function MainRules({ ruleType }: { ruleType: RuleTypes }) {
+type Props = {
+  ruleType: RuleTypes;
+};
+
+export default function MainRules({ ruleType }: Props) {
   return (
     <Box display={"flex"} gap={3}>
       {getIcon(ruleType)}

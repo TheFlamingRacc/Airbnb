@@ -59,7 +59,11 @@ function getIcon(amenitieType: AmenitieTypes) {
   return iconsMap[amenitieType];
 }
 
-export default function Amenities({ type }: { type: AmenitieTypes }) {
+type Props = {
+  type: AmenitieTypes;
+};
+
+export default function Amenities({ type }: Props) {
   return (
     <Typography
       display={"flex"}

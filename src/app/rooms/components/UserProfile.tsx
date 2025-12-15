@@ -1,10 +1,11 @@
 import { PropsWithChildren } from "react";
 import { Avatar, Box, Stack } from "@mui/material";
-export default function UserProfile({
-  children,
-  name,
-  icon,
-}: PropsWithChildren & { name: string; icon: null | string }) {
+
+type Props = PropsWithChildren & {
+  name: string;
+  icon: null | string;
+};
+export default function UserProfile({ children, name, icon }: Props) {
   return (
     <Box display={"flex"} gap={3}>
       <Avatar

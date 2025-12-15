@@ -1,19 +1,17 @@
 import { Box, Typography, IconButton, Button } from "@mui/material";
 import DateRangePickerCalendar from "../DateRangePickerCalendar";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
-import { Dayjs } from "dayjs";
+import { DateRangeCalendarPack, PageDataType } from "@/app/types";
 
-export default function Sec2SubSec7({
+type Props = DateRangeCalendarPack &
+  Pick<PageDataType, "apartmentLocation" | "disableDates">;
+
+export default function DateRangePickerComponent({
   value,
   apartmentLocation,
   disableDates,
   setValue,
-}: {
-  value: [Dayjs | null, Dayjs | null];
-  setValue: (value: [Dayjs | null, Dayjs | null]) => void;
-  apartmentLocation: string;
-  disableDates?: string[];
-}) {
+}: Props) {
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="text.primary">

@@ -1,5 +1,12 @@
-import { Avatar, Stack, Typography, Box, Rating } from "@mui/material";
+import { Stack, Typography, Rating } from "@mui/material";
 import UserProfile from "./UserProfile";
+import ShowMoreButton from "./ShowMoreButton";
+import { UserData } from "@/app/types";
+
+type Props = Pick<UserData, "name" | "message" | "rate" | "date" | "amount"> & {
+  avatar?: false | UserData["icon"];
+  desc: UserData["time"];
+};
 
 export default function Feedback({
   avatar = false,
@@ -9,15 +16,7 @@ export default function Feedback({
   date,
   amount,
   message,
-}: {
-  avatar?: false | string;
-  name: string;
-  desc: string;
-  rate: number;
-  date: string;
-  amount: string;
-  message: string;
-}) {
+}: Props) {
   return (
     <Stack spacing={1} maxWidth={500}>
       <UserProfile name={name} icon={avatar || null}>
@@ -46,17 +45,7 @@ export default function Feedback({
       <Typography fontSize={14} color="text.primary">
         {message.length >= 160 ? `${message.slice(0, 160)}...` : message}
       </Typography>
-      <Typography
-        component={"a"}
-        fontWeight={600}
-        color="text.secondary"
-        sx={{
-          textDecoration: "underline",
-          cursor: "pointer",
-        }}
-      >
-        Показати більше
-      </Typography>
+      <ShowMoreButton href="" />
     </Stack>
   );
 }

@@ -1,16 +1,13 @@
 import { Box, Paper, Typography, Button } from "@mui/material";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import { Dayjs } from "dayjs";
 
-export default function StickySubSection({
-  value,
-  setValue,
-  price,
-}: {
+type Props = {
   value: [null | Dayjs, null | Dayjs];
   setValue: (value: [Dayjs | null, Dayjs | null]) => void;
   price: number;
-}) {
+};
+
+export default function StickySubSection({ value, setValue, price }: Props) {
   return (
     <Box
       sx={{
